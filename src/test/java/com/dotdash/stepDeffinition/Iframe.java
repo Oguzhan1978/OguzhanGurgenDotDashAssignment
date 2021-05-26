@@ -29,7 +29,7 @@ public class Iframe {
         //locator of Iframe
         WebElement iframe = Driver.getDriver().findElement(By.id("mce_0_ifr"));
 
-        //Switching to Iframe.
+        //Switching to Iframe.in order to use Iframe we have to switch to iframe.
         Driver.getDriver().switchTo().frame(iframe);
 
         //Text box in Iframe locator and I send/write a message in the message box.

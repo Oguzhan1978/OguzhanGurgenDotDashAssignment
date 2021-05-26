@@ -1,6 +1,7 @@
 package com.dotdash.stepDeffinition;
 
 
+import com.dotdash.utillities.Driver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Assert;
@@ -12,6 +13,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.util.HashMap;
@@ -33,17 +35,18 @@ public class DownLoadFileTest {
         folder.mkdir(); // mk is makeDirectory
 
         WebDriverManager.chromedriver().setup();
-        ChromeOptions chroOpt = new ChromeOptions();
+        ChromeOptions chOpt = new ChromeOptions();
 
 
+        //creating a map here and I put preferences here key and value format.
         Map<String, Object> prefs = new HashMap<>();
         prefs.put("profile.default_content_settings.popups",0);
         prefs.put("download.default_directory",folder.getAbsolutePath());
 
-        chroOpt.setExperimentalOption("prefs",prefs);
+        chOpt.setExperimentalOption("prefs",prefs);
         DesiredCapabilities desCap = DesiredCapabilities.chrome();
 
-        desCap.setCapability(ChromeOptions.CAPABILITY, chroOpt);
+        desCap.setCapability(ChromeOptions.CAPABILITY, chOpt);
 
 
         driver = new ChromeDriver(desCap);
@@ -68,15 +71,17 @@ public class DownLoadFileTest {
     }
 
     @Test
-    public void downLoadFile() throws InterruptedException {
-
-        //WebElement downLoadFileLink = Driver.getDriver().findElement(By.xpath("//a[@href='download/some-file.txt']"));
+    public void downLoadFile(){
 
         WebElement download = driver.findElement(By.linkText("some-file.txt"));
         download.click();
 
         //We have to wait a few seconds for downloading file.
-        Thread.sleep(2000);
+        try {
+          Thread.sleep(2000);
+       } catch (InterruptedException e) {
+            e.printStackTrace();
+       }
 
 
         // created array here for file/files

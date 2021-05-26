@@ -39,12 +39,12 @@ public class LoginTest {
     @Test
     public void login_Test_With_Valid_Credentials() {
 
-
+       // here filling username box and password box then click login button
         login.usernameBox.sendKeys(username);
         login.passwordBox.sendKeys(password);
         login.loginButton.click();
 
-
+       //getting expected and actual messages.
         String expectedMessage = "You logged into a secure area!";
         String actualMessage = login.loginSuccessful.getText();
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(),5);
@@ -85,7 +85,7 @@ public class LoginTest {
         String actualMessage = login.invalidUsernameWarning.getText();
 
 
-        // Checking generated message for invalid user and correct password
+        // Checking generated message for invalid user and valid password
         Assert.assertTrue(actualMessage.contains(expectedMessage));
 
     }
@@ -93,7 +93,7 @@ public class LoginTest {
     @Test
     public void login_Test_With_Invalid_Password() {
 
-       //In here I'm checking correct user name and wrong password.
+       //In here I'm checking correct user name and invalid password.
         login.usernameBox.sendKeys("tomsmith");
         login.passwordBox.sendKeys("SuperSecret12345");
         login.loginButton.click();
@@ -110,7 +110,7 @@ public class LoginTest {
     @Test
     public void login_Test_With_Invalid_Username_And_Password() {
 
-      //In this test i checked wrong user name and password
+      //In this test i checked invalid username and password
         login.usernameBox.sendKeys("1tomsmith");
         login.passwordBox.sendKeys("SuperSecretPassword123");
         login.loginButton.click();
